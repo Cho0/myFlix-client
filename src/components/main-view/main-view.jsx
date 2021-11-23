@@ -29,11 +29,11 @@ class MainView extends React.Component {
       });
   }
 
-  /*setSelectedMovie(newSelectedMovie) {
+  setSelectedMovie(newSelectedMovie) {
     this.setState({
       selectedMovie: newSelectedMovie
     });
-  }*/
+  }
 
   onLoggedIn(user) {
     this.setState({

@@ -22916,11 +22916,12 @@ class MainView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    /*setSelectedMovie(newSelectedMovie) {
-    this.setState({
-      selectedMovie: newSelectedMovie
-    });
-  }*/ onLoggedIn(user) {
+    setSelectedMovie(newSelectedMovie) {
+        this.setState({
+            selectedMovie: newSelectedMovie
+        });
+    }
+    onLoggedIn(user) {
         this.setState({
             user
         });
