@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import { Container, Button, Row, Col, Link } from 'react-bootstrap';
 
-export class GenreView extends React.Component{
+export class GenreView extends React.Component {
 
   render() {
     const { Genre, onBackClick, movies } = this.props;
@@ -37,7 +37,7 @@ export class GenreView extends React.Component{
         <Row>
           <Col>
             {movies.map((m) => {
-              if (m.Genre.Name === Genre.Name){
+              if (m.Genre.Name === Genre.Name) {
                 return (
                   <Card>
                     <Card.Img variant="top" src={movies.ImagePath} />

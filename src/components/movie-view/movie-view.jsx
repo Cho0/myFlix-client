@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+
 
 
 export class MovieView extends React.Component {
@@ -9,7 +12,7 @@ export class MovieView extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keypress', this.keypressCallback);
-  }  
+  }
 
   componentWillUnmount() {
     document.removeEventListener('keypress', this.keypressCallback);
@@ -39,26 +42,7 @@ export class MovieView extends React.Component {
           <Button variant="link">Genre</Button>
         </Link>
 
-        <Route path="/movies/:movieID" render={({ match, history }) => {
-          return <Col md={8}>
-            <MovieView movie={movies.find(m => m._id === match.params.movieId)}
-            onBackClick={() => history.goBack()} />
-          </Col>          
-        }} />
-        <Route path="/directors/:name" render={({ match, history }) => {
-        if (movies.length === 0) return <div className="main-view" />;
-          return <Col md={8}>
-            <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
-          </Col>
-        }
-        } />
-        <Route path="/genres/:name" render={({ match, history }) => {
-        if (movies.length === 0) return <div className="main-view" />;
-          return <Col md={8}>
-            <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
-          </Col>
-        }
-        } />
+
       </div>
     );
   }

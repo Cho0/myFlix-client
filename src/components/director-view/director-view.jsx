@@ -1,11 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Card, Row, Col, Button, Link, Container } from 'react-bootstrap';
+import { Card, Row, Col, Button, Container, Header } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-export class DirectorView extends React.Component{
+
+
+export class DirectorView extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
 
   render() {
-    const { movies, onBackClick, Director } = this.props;
+    const { movies, onBackClick, director } = this.props;
 
     return (
       <Container>
@@ -18,33 +24,33 @@ export class DirectorView extends React.Component{
 
         <div>
           <span className="label">Name: </span>
-          <span className="value">{Director.Name}</span>
+          <span className="value">{director.Name}</span>
         </div>
         <div>
           <span className="label">Bio: </span>
-          <span className="value">{Director.Bio}</span>
+          <span className="value">{director.Bio}</span>
         </div>
         <div>
           <span className="label">Born: </span>
-          <span className="value">{Director.Birth}</span>
+          <span className="value">{director.Birth}</span>
         </div>
         <div>
           <span className="label">Death: </span>
-          <span className="value">{Director.Death}</span>
+          <span className="value">{director.Death}</span>
         </div>
 
         <Row>
           <Col>
             <p>
-              {Director.Name}'s Movie(s)
+              {director.Name}'s Movie(s)
             </p>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            {movies.map((m) => {
-              if (m.Director.Name === Director.Name){
+            {/* {movies.map((m) => {
+              if (m.Director.Name === Director.Name) {
                 return (
                   <Card>
                     <Card.Img variant="top" src={movies.ImagePath} />
@@ -58,7 +64,7 @@ export class DirectorView extends React.Component{
                   </Card>
                 );
               };
-            })};
+            })}; */}
           </Col>
         </Row>
       </Container>
@@ -66,11 +72,3 @@ export class DirectorView extends React.Component{
   };
 };
 
-DirectorView.proptypes = {
-  Director: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string,
-    Birth: PropTypes.string,
-    Death: PropTypes.number,
-  }).isRequired,
-};
