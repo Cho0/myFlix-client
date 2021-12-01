@@ -52,7 +52,7 @@ export class ProfileView extends React.Component {
 
   // ----------------------------- Delete Favorite Movie -----------------------------
 
-  removeMovie(selectedMovie) {
+  removeMovie(m) {
     m.preventDefault();
     axios.delete('https://jasons-myflix.herokuapp.com/users/:Username/favorites/:MovieID')
 
@@ -60,7 +60,8 @@ export class ProfileView extends React.Component {
 
   // ----------------------------- Delete User ----------------------------- 
 
-  deleteUser() {
+  deleteUser(m) {
+    m.preventDefault();
     axios.delete('https://jasons-myflix.herokuapp.com/users/:Username/', {
       header: { Authorization: `Bearer $token` },
     })
