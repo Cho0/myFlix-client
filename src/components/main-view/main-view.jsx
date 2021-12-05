@@ -83,7 +83,7 @@ class MainView extends React.Component {
       <Router>
         <header>
           <button onClick={() => { this.onLoggedOut() }}>Logout</button>
-          <Link to={`/users/:username`}>
+          <Link to={`/users/${user}`}>
             <Button variant="primary">
               Profile
             </Button>
@@ -127,7 +127,7 @@ class MainView extends React.Component {
             </Col>
           }
           } />
-          <Route path="/users/:username" render={({ match, history }) => {
+          <Route path={`/users/${user}`} render={({ match, history }) => {
             if (!user) return <Redirect to="/" />
             return <Col>
               <ProfileView user={user} onBackClick={() => history.goBack()} movies={movies} />
