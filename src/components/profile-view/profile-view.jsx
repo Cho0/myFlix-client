@@ -38,6 +38,7 @@ export class ProfileView extends React.Component {
 
   updateUser = (user) => {
     const token = localStorage.getItem("token");
+
     return axios.put(`https://jasons-myflix.herokuapp.com/users/${this.state.user.Username}/`,
       user,
       { headers: { Authorization: `Bearer ${token}` } }
@@ -46,26 +47,35 @@ export class ProfileView extends React.Component {
 
   // ----------------------------- Delete Favorite Movie -----------------------------
 
-  removeMovie = (user) => {
-    user.preventDefault();
+  removeMovie = (e, movie) => {
+    // e.preventDefault();
     const token = localStorage.getItem("token");
-    return axios.delete(`https://jasons-myflix.herokuapp.com/users/${this.state.user.Username}/favorites/${this.state.user.movies._id}`,
-      user,
+    return axios.delete(`https://jasons-myflix.herokuapp.com/users/${this.state.user.Username}/favorites/${movie._id}`,
       { headers: { Authorization: `Bearer ${token}` } }
     )
+      .then((response) => {
+        console.log(response);
+        alert("Movie was removed")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-  };
+
 
   // ----------------------------- Delete User ----------------------------- 
 
-  deleteUser(m) {
-    m.preventDefault();
+  deleteUser() {
+    const token = localStorage.getItem("token");
     axios.delete(`https://jasons-myflix.herokuapp.com/users/${this.state.user.Username}/`, {
-      header: { Authorization: `Bearer $token` },
+      header: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {
         console.log(response);
         alert("Profile has been deleted");
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
         window.open('/', '_self')
       })
       .catch((error) => {
@@ -177,7 +187,7 @@ export class ProfileView extends React.Component {
           <Col>
             <p>list</p>
 
-            {movies.filter(m => user.Favorites.includes(m._id)).map((m, i) => {
+            {user && movies.filter(m => user.Favorites.includes(m._id)).map((m, i) => {
               return (
                 <Card key={i}>
                   <Card.Img variant="top" src={m.ImagePath} />
@@ -190,11 +200,9 @@ export class ProfileView extends React.Component {
                     <Link to={`/movies/${m._id}`}>
                       <Button variant="link">Open</Button>
                     </Link>
-                    {/* <Button variant="link"
-                    onClick={this.removeMovie}
-                    >
+                    <Button variant="link" value={movies._id} onClick={(user) => this.removeMovie(user, m)}>
                       Remove Movie
-                    </Button> */}
+                    </Button>
                   </Card.Body>
                 </Card>
               )
@@ -203,7 +211,13 @@ export class ProfileView extends React.Component {
 
           </Col>
         </Row>
-
+        <div>
+          <p>Warning: This will delete your account</p>
+          <Button className="delete-button" variant="danger"
+            onClick={() => this.deleteUser()}>
+            Delete account
+          </Button>
+        </div>
       </Container>
 
     )
