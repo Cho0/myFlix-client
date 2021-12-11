@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Button, Container } from 'react-bootstrap';
 
 
-
 export class MovieView extends React.Component {
 
   keypressCallback(event) {
