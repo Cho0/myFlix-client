@@ -28,6 +28,7 @@ function addMovie(state = [], action) {
   }
 }
 
+
 const moviesApp = combineReducers({
   visibilityFilter,
   movies,

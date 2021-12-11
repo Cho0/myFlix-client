@@ -1,0 +1,11 @@
+addFavorite(token) {
+    axios.post(`https://jasons-myflix.herokuapp.com/users/${user.Username}/movies/${movies._id}`, {
+      header: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        console.log("Movie added: " + response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
